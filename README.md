@@ -11,3 +11,40 @@
   <img src="https://img.shields.io/badge/poetry-1.7.1-orange" alt="poetry@1.7.1">
   <img src="https://img.shields.io/badge/pytest-7.4.4-papayawhip" alt="pytest@7.4.4">
 </p>
+
+<h2 align="left">First Steps</h2>
+
+First install these libraries.
+
+```bash
+pip install fastapi uvicorn
+```
+
+Copy these lines of code in the `main.py` file.
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+  return {"message": "Hello World"}
+```
+
+From terminal run this command.
+
+```bash
+# --reload makes sure to update the changes, use it only in dev and not in production
+uvicorn main:app --reload
+```
+
+Open the url in your browser: [http://http://127.0.0.1:8000/](http://http://127.0.0.1:8000/) to see the result.
+
+```
+{
+    "message": "Hello World"
+}
+```
+
+Well! Congratualtions on building your first FastAPI app. Yes! it's that's easy to build apps, for now.
