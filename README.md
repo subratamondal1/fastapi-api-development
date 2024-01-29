@@ -1,4 +1,4 @@
-<p align="center"><a href="https://fastapi.tiangolo.com/"><img src="https://fastapi.tiangolo.com/img/icon-white.svg" width=200px></a></p> 
+<p align="center"><a href="https://fastapi.tiangolo.com/" target="_blank"><img src="https://fastapi.tiangolo.com/img/icon-white.svg" width=200px></a></p> 
 <h1 align="center">Python API Development with FastAPI</h1>
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.11.0-yellow" alt="python@3.11.0">
