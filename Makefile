@@ -1,29 +1,29 @@
 install:
-	# install pckages
+	# Install Required Packages
 	pip install --upgrade pip && pip install -r requirements.txt
 
-lint:
-	# lint code
-	pylint *.py
-
 format:
-	# format code
+	# Format code with Black
 	black *.py
 
+lint:
+	# Lint code with PyLint
+	pylint *.py
+	
 test:
-	# test
+	# Test code with PyTest
 	# python -m pytest --cov=mylib testfile.py
 
 build:
-	# build code with Github Actions for Continuous Integration
+	# Build code with Github Actions for Continuous Integration
 	# docker build -t fastapi-wiki .
 
 run:
-	# docker run
+	# Docker Run
 	# docker run -p 127.0.0.1:8080:8080 b19ef7dfd01b
 
 deploy:
-	# deploy using AWS ECR (Elastic Container Registry)
+	# Deploy using AWS ECR (Elastic Container Registry)
 
 all:
 	# combine all the needed steps in build in production

@@ -1,22 +1,17 @@
-from fastapi import FastAPI
+"""This module is the Entry Point for the FastAPI app"""
 
-app=FastAPI()
+from fastapi import FastAPI
 
 app = FastAPI()
 
+
 @app.get(path="/")
 async def index():
-    return {
-        "data": {
-            "index page message": "Welcome to Home Page."
-        }
-    }
+    """Our Home Page"""
+    return {"data": {"index page message": "Welcome to Home Page."}}
 
 
 @app.get(path="/about")
 async def about():
-    return {
-        "data": {
-            "about page message": "Welcome to our About Page."
-        }
-    }
+    """Our About Page"""
+    return {"data": {"about page message": "Welcome to our About Page."}}
