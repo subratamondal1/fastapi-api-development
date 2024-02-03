@@ -27,6 +27,7 @@ deploy:
 
 all:
 	# combine all the needed steps in build in production
+	make format lint
 
 run-fastapi:
 	# run fastapi app locally
