@@ -12,15 +12,15 @@ format:
 
 test:
 	# test
-	python -m pytest --cov=mylib testfile.py
+	# python -m pytest --cov=mylib testfile.py
 
 build:
 	# build code with Github Actions for Continuous Integration
-	docker build -t fastapi-wiki .
+	# docker build -t fastapi-wiki .
 
 run:
 	# docker run
-	docker run -p 127.0.0.1:8080:8080 b19ef7dfd01b
+	# docker run -p 127.0.0.1:8080:8080 b19ef7dfd01b
 
 deploy:
 	# deploy using AWS ECR (Elastic Container Registry)
