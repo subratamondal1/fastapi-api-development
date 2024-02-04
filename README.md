@@ -378,7 +378,93 @@ async def update_blog_by_id(id, request: schemas.Blog, db: Session = Depends(get
 
 <h2 align="left">Create User</h2>
 
+To create a user in FastAPI, you need to do the following steps:
+
+- Define a Pydantic model that represents the user data, such as username, email, password, etc. For example, you can create a model like this:
+
+```python
+from pydantic import BaseModel, EmailStr
+
+class User(BaseModel):
+    username: str
+    email: EmailStr
+    password: str
+```
+
+- Define a database model that maps to a table in your database, using SQLAlchemy or another ORM library. You can also use the same model as your Pydantic model, or create a separate one. For example, you can create a model like this:
+
+```python
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    email = Column(String, unique=True, index=True)
+    password = Column(String)
+```
+
+- Create a database session that allows you to interact with your database, using SQLAlchemy or another ORM library. You can also use FastAPI's `Depends` feature to inject a session into your endpoints. For example, you can create a session like this:
+
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine("sqlite:///database.db")
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+```
+
+- Create an endpoint that handles the user creation, using FastAPI's `app.post` decorator. You can use the Pydantic model as the input data, and the database model as the output data. You can also use the database session to perform the CRUD operations. For example, you can create an endpoint like this:
+
+```python
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy.exc import IntegrityError
+
+app = FastAPI()
+
+@app.post("/users/", response_model=User)
+def create_user(user: User, db: Session = Depends(get_db)):
+    db_user = User(**user.dict())
+    try:
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        return db_user
+    except IntegrityError:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username or email already exists.")
+```
+
+This endpoint will accept a JSON body with the user data, validate it using the Pydantic model, create a new user in the database using the database model, and return the created user as a JSON response. It will also handle the case where the username or email is already taken, and raise an appropriate error.
+
 <h2 align="left">Encrypting (Hashing) Password</h2>
+
+```python
+from passlib.context import CryptContext
+
+password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+class Hash:
+    """Encryption (Hashing) Class"""
+
+    def bcrypt(password: str):
+        """Encryption (Hashing) Method"""
+        return password_context.hash(password)
+```
+
+<h2 align="left">Use Docs Tags</h2>
 
 <h2 align="left">Relationship</h2>
 <h2 align="left">Refactor for Bigger Apps using Router</h2>

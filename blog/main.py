@@ -97,3 +97,16 @@ async def create_user(request: schemas.UserSchema, db: Session = Depends(get_db)
     db.refresh(new_user)
 
     return new_user
+
+@app.get(path="/user/{id}", response_model=schemas.UserResponseSchema)
+async def get_user_by_id(id:int, db: Session = Depends(get_db)):
+    """Get the user by ID"""
+    user = db.query(models.UserModel).filter(models.UserModel.id==id).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Your id: {id} is not available.",
+        )
+    return user
+
+
