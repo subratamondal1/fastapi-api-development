@@ -47,4 +47,10 @@ class Blog(BaseModel):
 async def create_blog(request: Blog):
     """Create a Blog (Data sent by the Client in Request Body)"""
 
-    return {"request": request}
+    return {
+        "request": {
+            "id": request.id,
+            "title": request.title,
+            "published_at": request.published_at,
+        }
+    }

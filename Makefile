@@ -4,11 +4,11 @@ install:
 
 format:
 	# Format code with Black
-	black *.py
+	black *.py blog/.
 
 lint:
 	# Lint code with PyLint
-	pylint *.py
+	pylint *.py blog/.
 	
 test:
 	# Test code with PyTest
@@ -31,4 +31,4 @@ all:
 
 run-fastapi:
 	# run fastapi app locally
-	uvicorn main:app --reload
+	uvicorn blog.main:app --reload
